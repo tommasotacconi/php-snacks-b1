@@ -54,7 +54,10 @@ if(isset($filtered_classes) && !empty($filtered_classes)) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Students of code</title>
   <!-- Link -->
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- style -->
+  <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
   <h1 class="text-center py-2 mb-3">Students of coding language</h1>
@@ -77,50 +80,54 @@ if(isset($filtered_classes) && !empty($filtered_classes)) {
 
     <!-- Page contents -->
     <main>
-      <section class="classes-cards">
-        <div class="row">
-          <?php foreach($classi as $class_name => $class_array) { ?>
-          <div class="col single-class">
-            <h2 class="text-center"><?= $class_name; ?></h2>
-            <?php foreach ($class_array as $student) { ?>
-            <h3><?= $student["nome"] . " " . $student["cognome"]; ?></h3>
-            <ul>
-              <li>
-                <span class="student-property">
-                  <?= $students_properties[0]; ?>:
-                </span>
-                <?= $student["id"]; ?>
-              </li>
-              <li>
-                <span class="student-property">
-                  <?= $students_properties[3]; ?>:
-                </span>
-                <?= $student["anni"]; ?>
-              </li>
-              <li>
-                <span class="student-property">
-                  <?= $students_properties[4]; ?>:
-                </span>
-                <?= $student["voto_medio"]; ?>
-              </li>
-              <li>
-                <span class="student-property">
-                  <?= $students_properties[5]; ?>:
-                </span>
-                <?= $student["linguaggio_preferito"]; ?>
-              </li>
-              <li>
-                <span class="student-property">
-                  <?= $students_properties[6]; ?>:
-                </span>
-                <?= $student["immagine"]; ?>
-              </li>
-            </ul>
-            <?php } ?>
+      <?php foreach($classi as $class_name => $class_array) { ?>
+      <section class="class border border-3 border-info-subtle p-4 my-5 rounded-2">
+        <h2 class="text-center mb-3"><?= $class_name; ?></h2>
+        <div class="row row-cols-4 gy-4">
+          <?php foreach ($class_array as $student) { ?>
+          <div class="col">
+            <div class="card">
+              <img src="<?= $student["immagine"]; ?>" alt="" class="card-img-top">
+              <div class="card-body">
+                <h3 class="card-title"><?= $student["nome"] . " " . $student["cognome"]; ?></h3>
+                <div class="card-text">
+                  <ul>
+                    <li>
+                      <span class="student-property">
+                        <?= $students_properties[0]; ?>:
+                      </span>
+                      <?= $student["id"]; ?>
+                    </li>
+                    <li>
+                      <span class="student-property">
+                        <?= $students_properties[3]; ?>:
+                      </span>
+                      <?= $student["anni"]; ?>
+                    </li>
+                    <li>
+                      <span class="student-property">
+                        <?= $students_properties[4]; ?>:
+                      </span>
+                      <?= $student["voto_medio"]; ?>
+                    </li>
+                    <li>
+                      <span class="student-property">
+                        <?= $students_properties[5]; ?>:
+                      </span>
+                      <?= $student["linguaggio_preferito"]; ?>
+                    </li>
+                    <li>
+                      <a href="<?= $student["immagine"]; ?>"><?= $students_properties[6]; ?></a>
+                    </li>
+                  </ul>
+                </div>                
+              </div>
+            </div>
           </div>
           <?php } ?>
         </div>
       </section>
+      <?php } ?>
     </main>
 </body>
 </html>
