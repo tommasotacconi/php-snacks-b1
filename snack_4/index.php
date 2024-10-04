@@ -4,6 +4,23 @@ include 'Classi-per-131.php';
 
 $students_properties = array_keys($classi["Classe 1A"][0]);
 // var_dump(array_keys($students_properties)[0]);
+
+$filtered_classes = [];
+
+// Filter classes per student's school average above 6
+foreach ($classi as $class_name => $class) {
+  $filtered_class = [];
+  foreach ($class as $student) {
+    if ($student["voto_medio"] >= 6) {
+      $filtered_class[] = $student;
+    }
+  }
+  $filtered_classes[$class_name] = $filtered_class;
+}
+
+if(isset($filtered_classes)) {
+  $classi = $filtered_classes;
+}
 ?>
 
 <!DOCTYPE html>
