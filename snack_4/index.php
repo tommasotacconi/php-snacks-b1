@@ -18,12 +18,12 @@ $students_properties = array_keys($classi["Classe 1A"][0]);
 <body>
   <main>
     <div class="container-md">
-      <h1 class="py-2 mb-3">Students of coding language</h1>
-      <section class="single-class">
+      <h1 class="text-center py-2 mb-3">Students of coding language</h1>
+      <section class="classes-cards">
         <div class="row">
           <?php foreach($classi as $class_name => $class_array) { ?>
-          <div class="col">
-            <h2><?= $class_name; ?></h2>
+          <div class="col single-class">
+            <h2 class="text-center"><?= $class_name; ?></h2>
             <?php foreach ($class_array as $student) { ?>
             <h3><?= $student["nome"] . " " . $student["cognome"]; ?></h3>
             <ul>
