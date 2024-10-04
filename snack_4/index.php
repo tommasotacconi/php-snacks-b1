@@ -2,7 +2,8 @@
 // File with data
 include 'Classi-per-131.php';
 
-
+$students_properties = array_keys($classi["Classe 1A"][0]);
+// var_dump(array_keys($students_properties)[0]);
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +25,38 @@ include 'Classi-per-131.php';
           <div class="col">
             <h2><?= $class_name; ?></h2>
             <?php foreach ($class_array as $student) { ?>
-            <h3><?= "{$student["nome"]} {$student["cognome"]}"; ?></h3>
+            <h3><?= $student["nome"] . " " . $student["cognome"]; ?></h3>
             <ul>
-              <li><?= $student["id"]; ?></li>
-              <li><?= $student["anni"]; ?></li>
-              <li><?= $student["voto_medio"]; ?></li>
-              <li><?= $student["linguaggio_preferito"]; ?></li>
-              <li><?= $student["immagine"]; ?></li>
+              <li>
+                <span class="student-property">
+                  <?= $students_properties[0]; ?>:
+                </span>
+                <?= $student["id"]; ?>
+              </li>
+              <li>
+                <span class="student-property">
+                  <?= $students_properties[3]; ?>:
+                </span>
+                <?= $student["anni"]; ?>
+              </li>
+              <li>
+                <span class="student-property">
+                  <?= $students_properties[4]; ?>:
+                </span>
+                <?= $student["voto_medio"]; ?>
+              </li>
+              <li>
+                <span class="student-property">
+                  <?= $students_properties[5]; ?>:
+                </span>
+                <?= $student["linguaggio_preferito"]; ?>
+              </li>
+              <li>
+                <span class="student-property">
+                  <?= $students_properties[6]; ?>:
+                </span>
+                <?= $student["immagine"]; ?>
+              </li>
             </ul>
             <?php } ?>
           </div>
