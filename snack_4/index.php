@@ -82,14 +82,22 @@ if(isset($filtered_classes) && !empty($filtered_classes)) {
     <main>
       <?php foreach($classi as $class_name => $class_array) { ?>
       <section class="class border border-3 border-info-subtle p-4 my-5 rounded-2">
-        <h2 class="text-center mb-3"><?= $class_name; ?></h2>
+        <!-- Class name -->
+        <h2 class="text-center mb-3"><?= strtoupper($class_name); ?></h2>
         <div class="row row-cols-4 gy-4">
+          <!-- Single student column and card -->
           <?php foreach ($class_array as $student) { ?>
           <div class="col">
             <div class="card">
+
+              <!-- Card image -->
               <img src="<?= $student["immagine"]; ?>" alt="" class="card-img-top">
+              
+              <!-- Card body -->
               <div class="card-body">
+                <!-- Card title -->
                 <h3 class="card-title"><?= $student["nome"] . " " . $student["cognome"]; ?></h3>
+                <!-- Card text -->
                 <div class="card-text">
                   <ul>
                     <li>
@@ -122,6 +130,7 @@ if(isset($filtered_classes) && !empty($filtered_classes)) {
                   </ul>
                 </div>                
               </div>
+
             </div>
           </div>
           <?php } ?>
