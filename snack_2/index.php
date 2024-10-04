@@ -6,14 +6,16 @@ $name;
 $email;
 $age;
 
-if (isset($name, $email, $age)) {
+if (isset($_GET['user-name'], $_GET['user-mail'], $_GET['user-age'])) {
   $name = $_GET['user-name'];
-  $email = $_GET['user-email'];
+  $email = $_GET['user-mail'];
   $age = $_GET['user-age'];
-
+  
   // Controllo
-  if (strlen($name) >= 3 && str_contains("%", $email) && is_int($age)) {
-  $accesso = true;
+  if (strlen($name) >= 3 && str_contains($email, "@") && str_contains($email, ".") && is_int(intval($age))) {
+    $accesso = true;
+  } else {
+    $accesso = false;
   }
 }
 
@@ -46,7 +48,11 @@ if (isset($name, $email, $age)) {
       <button>Submit</button>
     </form>
 
-    <p><?= isset($accesso) ? 'Accesso riuscito' : ''; ?></p>
+    <p class="mt-2">
+      <?php if(isset($accesso)) { ; ?>
+        <?= ($accesso) ? 'Accesso riuscito' : 'Accesso non riuscito'; ?>
+      <?php }; ?>
+    </p>
   </div>
 </main>
 </body>
