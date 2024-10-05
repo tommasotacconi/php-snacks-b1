@@ -123,7 +123,7 @@ if (isset($_GET['preferred-language']) && !($_GET['preferred-language'] === 'fal
     <!-- Page contents -->
     <main>
       <?php foreach($classi as $class_name => $class_array) { ?>
-      <section class="class border border-3 border-info-subtle p-4 my-5 rounded-2">
+      <section class="class border border-3 border-info-subtle p-4 my-5 rounded-1">
         <!-- Class name -->
         <h2 class="text-center mb-3"><?= strtoupper($class_name); ?></h2>
         <div class="row row-cols-4 gy-4">
