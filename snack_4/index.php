@@ -5,6 +5,15 @@ include 'Classi-per-131.php';
 // Define properties for a students in a indexe array
 $students_properties = array_keys($classi["Classe 1A"][0]);
 // var_dump(array_keys($students_properties)[0]);
+// Define preferred languages based on student's languages indicated
+$students_pref_lang = [];
+foreach ($classi as $class) {
+  foreach ($class as $student) {
+    if (!in_array($student['linguaggio_preferito'], $students_pref_lang)) {
+      $students_pref_lang[] = $student['linguaggio_preferito'];
+    }
+  }
+}
 
 // Initialize a variable to store filter result
 $filtered_classes = [];
@@ -21,30 +30,46 @@ $filtered_classes = [];
 }
  */
 
-// Initialize a maximum average to use it whes set from form
-$max_average;
 // Filter students per school average under selected mean vote
-if (isset($_GET['max-average'])) {
+if (isset($_GET['max-average']) && !($_GET['max-average'] === 'false')) {
+  // Set a variable by get method
   $max_average = $_GET['max-average'];
-  // echo '$max_average vale ' . $max_average;
+
+  // Filter phase
   foreach ($classi as $class_name => $class) {
     $filtered_class = [];
     foreach ($class as $student) {
-      if ($student["voto_medio"] <= $max_average) {
+      if ( $student["voto_medio"] <= $max_average) {
         $filtered_class[] = $student;
       }
     }
     $filtered_classes[$class_name] = $filtered_class;
   }
+
+  // Set var $classi equal to filter result ($filtered_class)
+  $classi = $filtered_classes;
 }
 
-// Set var $classi equal to filter result ($filtered_class)
-if(isset($filtered_classes) && !empty($filtered_classes)) {
-  // echo 'if di settaggio $classi';
-  $classi = $filtered_classes;
-} 
-?>
+// Filter students per preferred language selected
+if (isset($_GET['preferred-language']) && !($_GET['preferred-language'] === 'false')) {
+  // Set a variable by get method
+  $pref_lang = $_GET['preferred-language'];
+  
+  // Filter phase
+  foreach ($classi as $class_name => $class) {
+    $filtered_class = [];
+    foreach ($class as $student) {
+      if ($student["linguaggio_preferito"] === $pref_lang) {
+        $filtered_class[] = $student;
+      }
+    }
+    $filtered_classes[$class_name] = $filtered_class;
+  }
 
+  // Set var $classi equal to filter result ($filtered_class)
+  $classi = $filtered_classes;
+}
+?>
 
 
 <!DOCTYPE html>
@@ -64,18 +89,35 @@ if(isset($filtered_classes) && !empty($filtered_classes)) {
   
   <div class="container-md">
     <!-- Form -->
-    <form action="" class="form-control py-2 my-4 w-50 m-auto">
-      <label class="mb-1" for="max-average">Max school average visible</label><br>
-      <select class="form-select w-25" name="max-average" id="max-average">
-        <?php for($i = 1; $i <= 10; $i++) { ?>
-        <option name="<?= $i; ?>" value="<?= $i; ?>">
-        <?= $i; ?>
-        </option>
-        <?php }; ?>
-      </select>
+    <form action="" class="row py-2 my-4 w-50 m-auto">
+      <!-- School average -->
+      
+      <div class="col-4 average-select">
+        <label class="mb-1" for="max-average">Max school average</label><br>
+        <select class="form-select" name="max-average" id="max-average">
+          <option value="false" selected></option>
+          <?php for($i = 1; $i <= 10; $i++) { ?>
+          <option name="<?= $i; ?>" value="<?= $i; ?>">
+          <?= $i; ?>
+          </option>
+          <?php }; ?>
+        </select>
+      </div>
 
+      <!-- Preferred code language -->
+      <div class="col-4 code-lang-select">
+        <label class="mb-1" for="preferred-language">Preferred language</label><br>
+        <select class="form-select" name="preferred-language" id="preferred-language">
+          <option value="false" selected></option>
+          <?php foreach ($students_pref_lang as $pref_lang) { ?>
+          <option value="<?= $pref_lang; ?>"><?= $pref_lang; ?></option>
+          <?php } ?>
+        </select>
+      </div>
       <!-- Buttons -->
-      <button class="btn btn-info mt-4">Submit</button>
+      <div class="col-12">
+        <button class="btn btn-info mt-4">Submit</button>
+      </div>
     </form>
 
     <!-- Page contents -->
