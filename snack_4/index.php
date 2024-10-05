@@ -167,7 +167,9 @@ if (isset($_GET['preferred-language']) && !($_GET['preferred-language'] === 'fal
                       <?= $student["linguaggio_preferito"]; ?>
                     </li>
                     <li>
-                      <a href="<?= $student["immagine"]; ?>"><?= $students_properties[6]; ?></a>
+                      <a href="<?= $student["immagine"]; ?>">
+                        <?= "{$student["nome"][0]}{$student["cognome"][0]} $students_properties[6]"; ?>
+                      </a>
                     </li>
                   </ul>
                 </div>                
