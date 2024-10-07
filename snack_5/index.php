@@ -1,6 +1,16 @@
 <?php 
 
-require_once __DIR__ 'fuctions.phh';
+require_once (__DIR__ . '/functions.php');
+
+// Execute control for palindrome word
+$result;
+$not;
+if (isset($_GET['palindrome-control'])) {
+  $result = isPalindrome($_GET['palindrome-control']);
+  
+  // Decide to put 'not'
+  $not = $result ? '' : 'non';
+}
 
 ?>
 
@@ -17,9 +27,13 @@ require_once __DIR__ 'fuctions.phh';
     <h1>Palindrome words checker</h1>
     <form action="" method="$_GET">
       <label for="palidrome_controll">Word to check</label>
-      <input type="text">
+      <input type="text" name="palindrome-control" id="palindrome-control">
     </form>
-    <p></p>
+
+    <?php if (isset($_GET['palindrome-control'])) { ?>
+      <p>La parola che hai inserito <?= $not; ?> è palindroma.</p>
+    <?php } ?>
+    
   </main>  
   </div> 
 </body>
